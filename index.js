@@ -36,3 +36,26 @@ let productData = [
   }
 ];
 // ======= 請從這裡開始 =======
+// 1. 顯示所有的品項名稱、價格和照片
+function displayProduct() {
+  let contentHTML = ``
+
+  productData.forEach((product) => {
+    contentHTML += `
+                  <div class="col-3">
+                    <div class="card">
+                      <img src="${product.imgUrl}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">${product.name}</h5>
+                        <p class="card-text">${product.price}</p>
+                        <a href="#" class="btn btn-primary">加入購物車</a>
+                      </div>
+                    </div>
+                  </div>
+                `
+  })
+
+  menu.innerHTML = contentHTML
+}
+
+displayProduct()
