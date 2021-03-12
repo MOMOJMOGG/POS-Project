@@ -99,9 +99,11 @@ function updateCartList(newOrder) {
 
 function renderCart(cartList) {
   let contentHTML = ``
+  let totalCost = 0
 
   cartList.forEach((order) => {
     const totalPrice = order.price * order.amount
+    totalCost += totalPrice
 
     contentHTML += `
         <li class="list-group-item">${order.product} X ${order.amount} 小計：${totalPrice}</li>
@@ -109,4 +111,7 @@ function renderCart(cartList) {
   })
 
   cart.innerHTML = contentHTML
+
+  // 更新 總金額
+  totalAmount.innerText = totalCost
 }
