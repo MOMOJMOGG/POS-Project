@@ -116,14 +116,39 @@ function renderCart(cartList) {
   totalAmount.innerText = totalCost
 }
 
-button.addEventListener('click', function sendOrder(event) {
+// modal element
+const modalBody = document.querySelector('.modal-body')
 
+button.addEventListener('click', function sendOrder(event) {
+  const listGroupItems = cart.children
+  const itemsCount = cart.children.length
+  let newNode = null
+
+  const ul = elementCreator("ul")
+  ul.style = "list-style-type:none"
+
+  for (let i = 0; i < itemsCount; i++) {
+    newNode = elementCreator("li", listGroupItems[i].innerText)
+    ul.appendChild(newNode)
+  }
+
+  newNode = elementCreator("li", totalAmount.parentElement.innerText)
+  ul.appendChild(newNode)
+
+  modalBody.appendChild(ul)
 })
+
+function elementCreator(tag, text = "") {
+  const tagElement = document.createElement(tag)
+  tagElement.innerText = text
+  return tagElement
+}
 
 function clearCart() {
   cart.innerHTML = ``
   totalAmount.innerText = '--'
   localStorage.removeItem('cartList')
+  modalBody.innerHTML = ``
 }
 
 // bootstrap 4 modal event
