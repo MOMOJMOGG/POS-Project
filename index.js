@@ -118,6 +118,23 @@ function renderCart(cartList) {
 const modalBody = document.querySelector('.modal-body')
 
 button.addEventListener('click', function sendOrder(event) {
+  /// 確認 是否有點餐
+  const cartList = JSON.parse(localStorage.getItem('cartList')) || []
+
+  if (cartList.length === 0) {
+    emptyOrderNotify()
+  } else {
+    listSendOrder()
+  }
+})
+
+function listSendOrder() {
+  const modalTitle = modalBody.previousElementSibling.firstElementChild
+  modalTitle.innerText = "AC咖啡 感謝您的購買 (*≧▽≦)"
+
+  const modalCheckBtn = modalBody.nextElementSibling.firstElementChild
+  modalCheckBtn.innerText = "結帳"
+
   const listGroupItems = cart.children
   const itemsCount = cart.children.length
   let newNode = null
@@ -134,7 +151,15 @@ button.addEventListener('click', function sendOrder(event) {
   ul.appendChild(newNode)
 
   modalBody.appendChild(ul)
-})
+}
+
+function emptyOrderNotify() {
+  const modalTitle = modalBody.previousElementSibling.firstElementChild
+  modalTitle.innerText = "AC咖啡 客人, 您還沒點餐呢! ╮(╯▽╰)╭"
+
+  const modalCheckBtn = modalBody.nextElementSibling.firstElementChild
+  modalCheckBtn.innerText = "繼續點餐"
+}
 
 function elementCreator(tag, text = "") {
   const tagElement = document.createElement(tag)
@@ -151,14 +176,11 @@ function clearCart() {
 
 // bootstrap 4 modal event
 $('#post-modal').on('hidden.bs.modal', (event) => {
-  console.log('hidden')
-
   // 清空 購物車清單 與 總金額 與 localStorage 暫存檔
   clearCart()
 })
 
 $('#send-order-check').on('click', (event) => {
-  console.log('btn check')
   // 清空 購物車清單 與 總金額 與 localStorage 暫存檔
   clearCart()
 
