@@ -115,3 +115,14 @@ function renderCart(cartList) {
   // 更新 總金額
   totalAmount.innerText = totalCost
 }
+
+button.addEventListener('click', function sendOrder(event) {
+  // 清空 購物車清單 與 總金額 與 localStorage 暫存檔
+  clearCart()
+})
+
+function clearCart() {
+  cart.innerHTML = ``
+  totalAmount.innerText = '--'
+  localStorage.removeItem('cartList')
+}
