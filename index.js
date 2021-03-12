@@ -69,6 +69,27 @@ menu.addEventListener('click', function onAddToCart(event) {
 
     const order = { product: product.innerText, price: price.innerText, amount: 1 }
     // 更新購物車清單
-    console.log('更新購物車清單:', order)
+    updateCartList(order)
   }
 })
+
+function updateCartList(newOrder) {
+  function cartOrderMatched(order) {
+    return order.product === newOrder.product
+  }
+
+  // 取得 LocalStorage 資料
+  const cartList = JSON.parse(localStorage.getItem('cartList')) || []
+
+  // 確認新點單是否存在購物車中
+  if (cartList.some(cartOrderMatched)) {
+    const targetObj = cartList.find(cartOrderMatched)
+    targetObj.amount += 1
+  } else {
+    cartList.push(newOrder)
+  }
+
+  console.log(cartList)
+  // 更新 localStorage
+  localStorage.setItem('cartList', JSON.stringify(cartList))
+}
