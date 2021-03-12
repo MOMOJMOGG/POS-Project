@@ -117,8 +117,7 @@ function renderCart(cartList) {
 }
 
 button.addEventListener('click', function sendOrder(event) {
-  // 清空 購物車清單 與 總金額 與 localStorage 暫存檔
-  clearCart()
+
 })
 
 function clearCart() {
@@ -126,3 +125,20 @@ function clearCart() {
   totalAmount.innerText = '--'
   localStorage.removeItem('cartList')
 }
+
+// bootstrap 4 modal event
+$('#post-modal').on('hidden.bs.modal', (event) => {
+  console.log('hidden')
+
+  // 清空 購物車清單 與 總金額 與 localStorage 暫存檔
+  clearCart()
+})
+
+$('#send-order-check').on('click', (event) => {
+  console.log('btn check')
+  // 清空 購物車清單 與 總金額 與 localStorage 暫存檔
+  clearCart()
+
+  // 關閉 跳出視窗
+  $('#post-modal').modal('hide')
+})
