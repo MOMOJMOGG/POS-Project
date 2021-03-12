@@ -59,3 +59,16 @@ function displayProduct() {
 }
 
 displayProduct()
+
+// 2. 購物車清單 與 事件處理
+menu.addEventListener('click', function onAddToCart(event) {
+  const target = event.target
+  if (target.tagName === "A") {
+    const price = target.previousElementSibling
+    const product = price.previousElementSibling
+
+    const order = { product: product.innerText, price: price.innerText, amount: 1 }
+    // 更新購物車清單
+    console.log('更新購物車清單:', order)
+  }
+})
