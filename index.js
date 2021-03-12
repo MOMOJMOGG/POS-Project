@@ -110,13 +110,14 @@ function renderCart(cartList) {
 
   cart.innerHTML = contentHTML
 
-  // 更新 總金額
+  // 3. 更新總金額
   totalAmount.innerText = totalCost
 }
 
 // modal element
 const modalBody = document.querySelector('.modal-body')
 
+// 4. 送出訂單 跳出收據
 button.addEventListener('click', function sendOrder(event) {
   /// 確認 是否有點餐
   const cartList = JSON.parse(localStorage.getItem('cartList')) || []
@@ -174,6 +175,7 @@ function clearCart() {
   modalBody.innerHTML = ``
 }
 
+// 5. 確認收據, 購物車被清空
 // bootstrap 4 modal event
 $('#post-modal').on('hidden.bs.modal', (event) => {
   // 清空 購物車清單 與 總金額 與 localStorage 暫存檔
