@@ -68,6 +68,7 @@ menu.addEventListener('click', function onAddToCart(event) {
     const product = price.previousElementSibling
 
     const order = { product: product.innerText, price: price.innerText, amount: 1 }
+
     // 更新購物車清單
     updateCartList(order)
   }
@@ -89,7 +90,23 @@ function updateCartList(newOrder) {
     cartList.push(newOrder)
   }
 
-  console.log(cartList)
   // 更新 localStorage
   localStorage.setItem('cartList', JSON.stringify(cartList))
+
+  // 刷新顯示購物車清單
+  renderCart(cartList)
+}
+
+function renderCart(cartList) {
+  let contentHTML = ``
+
+  cartList.forEach((order) => {
+    const totalPrice = order.price * order.amount
+
+    contentHTML += `
+        <li class="list-group-item">${order.product} X ${order.amount} 小計：${totalPrice}</li>
+    `
+  })
+
+  cart.innerHTML = contentHTML
 }
