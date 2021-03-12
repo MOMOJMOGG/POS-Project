@@ -58,8 +58,6 @@ function displayProduct() {
   menu.innerHTML = contentHTML
 }
 
-displayProduct()
-
 // 2. 購物車清單 與 事件處理
 menu.addEventListener('click', function onAddToCart(event) {
   const target = event.target
@@ -167,3 +165,11 @@ $('#send-order-check').on('click', (event) => {
   // 關閉 跳出視窗
   $('#post-modal').modal('hide')
 })
+
+// 頁面初始化
+function initial() {
+  displayProduct()
+  clearCart()
+}
+
+initial()
